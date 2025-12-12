@@ -601,6 +601,213 @@
         border-radius: 18px;
       }
     }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+      padding: 2.5rem;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid rgba(255, 140, 0, 0.2);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header h2 {
+      font-size: 1.8rem;
+      color: var(--text-main);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.8rem;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .file-upload {
+      position: relative;
+      border: 2px dashed rgba(255, 140, 0, 0.4);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255, 140, 0, 0.05);
+    }
+
+    .file-upload:hover {
+      border-color: var(--accent);
+      background: rgba(255, 140, 0, 0.1);
+    }
+
+    .file-upload input {
+      display: none;
+    }
+
+    .file-upload-text {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .file-upload-text strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .file-list {
+      margin-top: 1rem;
+      list-style: none;
+    }
+
+    .file-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      background: rgba(255, 140, 0, 0.1);
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .file-remove {
+      background: none;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      padding: 0;
+      font-weight: bold;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .form-actions .btn {
+      flex: 1;
+      text-align: center;
+      padding: 0.75rem 1.5rem;
+      display: block;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+      border-color: var(--text-muted);
+      color: var(--text-main);
+    }
+
+    .form-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(255, 140, 0, 0.1);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        padding: 1.5rem;
+      }
+
+      .form-actions {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
@@ -819,10 +1026,6 @@
           <span class="contact-label">Phone</span><br>
           <span>438‑990‑2484</span>
         </div>
-        <div>
-          <span class="contact-label">Address</span><br>
-          <span>704‑651 Robert‑Élie, Laval, Quebec, Canada</span>
-        </div>
       </div>
     </div>
     <div class="contact-banner-right">
@@ -835,6 +1038,79 @@
   </section>
 </main>
 
+<!-- MODAL FORM -->
+<div id="quotationModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Request a Quote</h2>
+      <button class="modal-close" onclick="closeQuotationModal()">&times;</button>
+    </div>
+
+    <form id="quotationForm" onsubmit="handleFormSubmit(event)">
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone">
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company (optional)</label>
+        <input type="text" id="company" name="company">
+      </div>
+
+      <div class="form-group">
+        <label for="material">Preferred Material (optional)</label>
+        <select id="material" name="material">
+          <option value="">-- Choose a material --</option>
+          <option value="pla">PLA</option>
+          <option value="abs">ABS</option>
+          <option value="petg">PETG</option>
+          <option value="tpu">TPU (Flexible)</option>
+          <option value="nylon">Nylon</option>
+          <option value="carbon">Carbon Fiber</option>
+          <option value="autre">Other / To be determined</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Project Description *</label>
+        <textarea id="description" name="description" required placeholder="Describe your project, intended use, desired quantity..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>3D Files to attach *</label>
+        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+          <div class="file-upload-text">
+            <strong>Click to add files</strong>
+            <p>or drag and drop here</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">Accepted formats: STL, OBJ, 3MF</p>
+          </div>
+          <input type="file" id="fileInput" multiple accept=".stl,.obj,.3mf,model/stl,model/obj,model/3mf" onchange="handleFileSelect(event)">
+        </div>
+        <ul id="fileList" class="file-list"></ul>
+      </div>
+
+      <div class="form-note">
+        <strong>📌 Tip:</strong> Attach your 3D files (STL, OBJ or 3MF). Also indicate the intended use, important tolerances and any specific details for an accurate estimate.
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="closeQuotationModal()">Cancel</button>
+        <button type="submit" class="btn">Send Quote Request</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <footer>
   <div class="footer-inner">
     <span>© <span id="year"></span> 3Déclic · 3D printing workshop in Laval.</span>
@@ -844,6 +1120,156 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Variables to store files
+  let uploadedFiles = [];
+
+  // Open modal
+  function openQuotationModal() {
+    document.getElementById('quotationModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close modal
+  function closeQuotationModal() {
+    document.getElementById('quotationModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    const modal = document.getElementById('quotationModal');
+    if (event.target === modal) {
+      closeQuotationModal();
+    }
+  }
+
+  // Handle file selection
+  function handleFileSelect(event) {
+    const files = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      // Validate extension
+      const validExtensions = ['.stl', '.obj', '.3mf'];
+      const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+      
+      if (validExtensions.includes(fileExtension)) {
+        // Check if file already exists
+        if (!uploadedFiles.find(f => f.name === file.name && f.size === file.size)) {
+          uploadedFiles.push(file);
+        }
+      } else {
+        alert(`Format not accepted: ${file.name}. Use STL, OBJ or 3MF.`);
+      }
+    }
+    updateFileList();
+  }
+
+  // Update file list
+  function updateFileList() {
+    const fileList = document.getElementById('fileList');
+    fileList.innerHTML = '';
+    
+    uploadedFiles.forEach((file, index) => {
+      const li = document.createElement('li');
+      li.className = 'file-list-item';
+      const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      li.innerHTML = `
+        <span>${file.name} (${fileSizeMB} MB)</span>
+        <button type="button" class="file-remove" onclick="removeFile(${index})">✕</button>
+      `;
+      fileList.appendChild(li);
+    });
+  }
+
+  // Remove file
+  function removeFile(index) {
+    uploadedFiles.splice(index, 1);
+    updateFileList();
+  }
+
+  // Form submission handler
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    if (uploadedFiles.length === 0) {
+      alert('Please attach at least one 3D file.');
+      return;
+    }
+
+    // Collect form data
+    const formData = new FormData();
+    formData.append('name', document.getElementById('name').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('phone', document.getElementById('phone').value);
+    formData.append('company', document.getElementById('company').value);
+    formData.append('material', document.getElementById('material').value);
+    formData.append('description', document.getElementById('description').value);
+
+    // Add files
+    uploadedFiles.forEach(file => {
+      formData.append('files', file);
+    });
+
+    // Send via email (simulated)
+    // In production, this should be sent to a server
+    const emailBody = `
+New quote request:
+
+Name: ${formData.get('name')}
+Email: ${formData.get('email')}
+Phone: ${formData.get('phone')}
+Company: ${formData.get('company') || 'Not specified'}
+Preferred Material: ${formData.get('material') || 'To be determined'}
+
+Project Description:
+${formData.get('description')}
+
+Attached Files: ${uploadedFiles.length} file(s)
+${uploadedFiles.map(f => `- ${f.name} (${(f.size / 1024).toFixed(0)} KB)`).join('\n')}
+    `;
+
+    // Open email client (simple fallback)
+    window.location.href = `mailto:info@3D-clic.com?subject=Quote Request - ${encodeURIComponent(formData.get('name'))}&body=${encodeURIComponent(emailBody)}`;
+
+    // Clear form
+    document.getElementById('quotationForm').reset();
+    uploadedFiles = [];
+    updateFileList();
+    
+    alert('Your request has been sent. We will respond as soon as possible!');
+    closeQuotationModal();
+  }
+
+  // Allow drag and drop
+  const fileUpload = document.querySelector('.file-upload');
+  if (fileUpload) {
+    fileUpload.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      fileUpload.style.borderColor = 'var(--accent)';
+      fileUpload.style.background = 'rgba(255, 140, 0, 0.2)';
+    });
+
+    fileUpload.addEventListener('dragleave', () => {
+      fileUpload.style.borderColor = 'rgba(255, 140, 0, 0.4)';
+      fileUpload.style.background = 'rgba(255, 140, 0, 0.05)';
+    });
+
+    fileUpload.addEventListener('drop', (e) => {
+      e.preventDefault();
+      fileUpload.style.borderColor = 'rgba(255, 140, 0, 0.4)';
+      fileUpload.style.background = 'rgba(255, 140, 0, 0.05)';
+      handleFileSelect({ target: { files: e.dataTransfer.files } });
+    });
+  }
+
+  // Link "Get a Quote" buttons to modal
+  document.querySelectorAll('a[href="#contact"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      openQuotationModal();
+    });
+  });
 </script>
 
 </body>
